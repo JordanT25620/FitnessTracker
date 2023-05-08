@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+    /* Workout.php log form */
     $("#logWorkoutBtn").click(function(){
         $("#logWorkoutBtnDiv").hide();
         $("#cardioOrLiftForm").css("display", "block");
