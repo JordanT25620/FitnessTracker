@@ -34,7 +34,7 @@ body {
     background-attachment: fixed;
     text-align: center;
     justify-content: center;
-    animation: change 30s infinite ease-in-out;
+    animation: change 30s ease-in-out infinite;
     
 }
 
@@ -156,8 +156,13 @@ input:-webkit-autofill:active{
     display: flex;
 }
 
-.stripes {
+.stripes-orange {
     background-image: linear-gradient(45deg, orange 25%, transparent 25%, transparent 50%, orange 50%, orange 75%, transparent 75%, #fff);
+    background-size: 50px 50px;
+}
+
+.stripes-blue{
+    background-image: linear-gradient(45deg, rgb(0, 153, 255) 25%, transparent 25%, transparent 50%, rgb(0, 153, 255) 50%, rgb(0, 153, 255) 75%, transparent 75%, #fff);
     background-size: 50px 50px;
 }
 
@@ -171,9 +176,14 @@ input:-webkit-autofill:active{
     background-image: linear-gradient(to bottom right, rgba(250, 180, 50, 0.8), rgba(255, 136, 0, 0.8));
 }
 
+.blueBackdrop {
+    border-radius: 20px;
+    background-image: linear-gradient(to bottom right, rgba(50, 250, 233, 0.8), rgba(50, 153, 250, 0.8));
+}
+
 /* Small Screens */
 @media (max-width: 992px){
-    .grayBackdrop, .orangeBackdrop {
+    .grayBackdrop, .orangeBackdrop, .blueBackdrop {
         width: 90%;
     }
 }
@@ -181,10 +191,10 @@ input:-webkit-autofill:active{
 
 /* Large Screens */
 @media (min-width: 992px) {
-    .grayBackdrop {
+    .grayBackdrop, .blueBackdrop {
         width: 48%;
     }
-    .orangeBackdrop {
+    .orangeBackdrop, .blueBackdrop {
         width: 60%;
     }
 }
@@ -194,7 +204,7 @@ input:-webkit-autofill:active{
     display: none;
 }
 
-#logWorkoutBtnDiv {
+#logWorkoutBtnDiv, #logWeightBtnDiv {
     width: 100%;
     display: flex;
     flex-direction: column;

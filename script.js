@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    /* Workout.php log form */
+    /* workout.php log form */
     $("#logWorkoutBtn").click(function(){
         $("#logWorkoutBtnDiv").hide();
         $("#cardioOrLiftForm").css("display", "block");
@@ -15,6 +15,12 @@ $(document).ready(function(){
             $("#cardioOrLiftForm").hide();
             $("#liftForm").show();
         }
+    });
+
+    /* weight.php log form */
+    $("#logWeightBtn").click(function(){
+        $("#logWeightBtnDiv").hide();
+        $("#logWeightForm").css("display", "block");
     });
     
 });

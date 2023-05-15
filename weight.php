@@ -83,16 +83,16 @@
     </div>
   </nav>
 
-    <div class="jumbotron stripes-orange mb-0 pb-3">
-        <h1 class="display-4">Workout Logger</h1>
-        <p class="lead">Log and track your progress on several popular exercises over time!</p>
+    <div class="jumbotron stripes-blue mb-0 pb-3">
+        <h1 class="display-4">Weight Logger</h1>
+        <p class="lead">Log and track your progress towards your target weight!</p>
         <hr class="my-4">
-        <p>You have made 51% progress towards completing your Bench Press goal!</p>
+        <p>You have made 51% progress towards your target weight!</p>
         <div class="progress w-50 mb-3">
             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">View Goals</a>
+            <a class="btn btn-warning btn-lg" href="#" role="button">View Goals</a>
         </p>
     </div>
 
@@ -100,7 +100,7 @@
         <div class="grayBackdrop mt-5 mb-5 p-3 p-lg-5 mx-auto">
 
             <!-- Before displaying form -->
-                <div id="logWorkoutBtnDiv" style="height:100%; justify-content: center;">
+                <div id="logWeightBtnDiv" style="height:100%; justify-content: center;">
                     <div class="row">
                         <div class="col" style="margin: auto">
                             <?php 
@@ -144,178 +144,55 @@
                                         echo "<h4 style='color: red;'>Error occurred while logging your weightlifting session!</h4>";
                                     }
                                 } else {
-                                    echo "<h2>Log Today's Workout</h2>";
+                                    echo "<h2>Log Today's Weigh-In</h2>";
                                 }
                             ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col" style="margin: auto">
-                            <button id="logWorkoutBtn" class="btn btn-warning">Start New Log</button>
+                            <button id="logWeightBtn" class="btn btn-warning">Start New Log</button>
                         </div>                 
                     </div>
                 </div>
             <!-- -->
 
-            <form id="cardioOrLiftForm" class="myForm">
-                <div id="typeExerciseItem" class="logEntryItem">
-                    <i class="fa-solid fa-person-running fa-5x orange"></i>
-                    <div class="my-auto mx-3">
-                        <div>
-                            <label for="typeExercise">Type of Exercise</label>
-                        </div>
-                        <div>
-                            <select name="typeExercise" class="logInput" required autofocus>
-                                <option value="Select an Option">Select an Option</option>
-                                <option value="Cardio">Cardio</option>
-                                <option value="Weightlifting">Weightlifting</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <form id="logWeightForm" class="myForm" method="post" action="workout.php">
 
-            <form id="cardioForm" class="myForm" method="post" action="workout.php">
-                <div id="typeCardioItem" class="logEntryItem">
-                    <i class="fa-solid fa-person-biking fa-5x orange ml-3"></i>
+                <div id="dateWeightItem" class="logEntryItem">
+                    <i class="fa-regular fa-calendar fa-5x" style="color: #3299e9;"></i>
                     <div class="my-auto mx-3">
                         <div>
-                            <label for="typeOfCardio">Type of Cardio</label>
-                        </div>
-                        <div>
-                            <select name="typeOfCardio" class="logInput" required autofocus>
-                                <option value="Treadmill">Treadmill</option>
-                                <option value="Bicycle">Bicycle</option>
-                                <option value="Swimming">Swimming</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="timeCardioItem" class="logEntryItem">
-                    <i class="fa-solid fa-clock fa-5x orange"></i>
-                    <div class="my-auto mx-3">
-                        <div>
-                            <label for="timeCardio">Time Spent</label>
-                        </div>
-                        <div class="row ml-2">
-                            <div class="form-item-question">
-                                <input type="number" step="0.1" min="0.1" max="1440" name="timeCardio" placeholder="Enter amount" class="logInput" style="width: 200px;" required></input>
-                            </div>
-                            <div class="ml-2">
-                                <label for="cardioTime">
-                                    <input type="radio" name="cardioTime" value="min"checked>mins</input>
-                                </label>
-                                <label for="cardioTime">
-                                    <input type="radio" name="cardioTime" value="hr">hrs</input>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="dateCardioItem" class="logEntryItem">
-                    <i class="fa-regular fa-calendar fa-5x orange"></i>
-                    <div class="my-auto mx-3">
-                        <div>
-                            <label for="dateCardio">Date of Workout</label>
+                            <label for="dateWeight">Date of Weigh-In</label>
                         </div>
                         <div class="form-item-question">
-                            <input type="date" name="dateCardio" min="2022-01-01" max="<?php echo date('Y-m-d');?>" value="<?php echo date('Y-m-d');?>" class="logInput"></input>
+                            <input type="date" name="dateWeight" min="2022-01-01" max="<?php echo date('Y-m-d');?>" value="<?php echo date('Y-m-d');?>" class="logInput"></input>
                         </div>
                     </div>
                 </div>
 
-                <div id="cardioSubmit" class="logEntryItem text-center">
+                <div id="weightItem" class="logEntryItem">
+                <i class="fa-solid fa-weight-scale fa-5x" style="color: #3299e9;"></i>
+                    <div class="my-auto mx-3">
+                        <div>
+                            <label for="weight">Weight (Lbs)</label>
+                        </div>
+                        <div class="form-item-question">
+                            <input type="number" step="0.1" min="1" max="1000" name="weight" placeholder="Enter weight" class="logInput" required></input>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="weightSubmit" class="logEntryItem text-center">
                     <div class="col-10">
-                        <input type="submit" name="cardioSubmitBtn" class="btn btn-warning" value="Submit Log"></input>
-                    </div>
-                </div>
-
-            </form>
-
-            <form id="liftForm" class="myForm" method="post" action="workout.php">
-                <div id="exerciseItem" class="logEntryItem ml-1 ml-lg-0">
-                    <i class="fas fa-dumbbell fa-5x orange"></i>
-                    <div class="my-auto mx-3">
-                        <div>
-                            <label for="exercise">Exercise</label>
-                        </div>
-                        <div>
-                            <select name="exercise" class="logInput" required autofocus>
-                                <option value="Bench Press">Bench Press</option>
-                                <option value="Deadlift">Deadlift</option>
-                                <option value="Squat">Squat</option>
-                                <option value="Overhead Press">Overhead Press</option>
-                                <option value="Leg Press">Leg Press</option>
-                                <option value="Bicep Curls">Bicep Curls</option>
-                                <option value="Tricep Extensions">Tricep Extensions</option>
-                                <option value="Lat Pulldowns">Lat Pulldowns</option>
-                                <option value="Lat Raises">Lat Raises</option>
-                                <option value="Bench Press">Dips</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="weightLiftedItem" class="logEntryItem">
-                <i class="fa-solid fa-weight-hanging fa-5x orange"></i>
-                    <div class="my-auto mx-3">
-                        <div>
-                            <label for="weight-lifted">Weight Lifted (Lbs)</label>
-                        </div>
-                        <div class="form-item-question">
-                            <input type="number" step="0.5" min="0.5" max="2000" name="weight-lifted" placeholder="Enter amount" class="logInput" required></input>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="numSetsItem" class="logEntryItem">
-                <i class="fa-solid fa-toolbox fa-5x orange"></i>
-                    <div class="my-auto mx-3">
-                        <div>
-                            <label for="numSets">Number of Sets</label>
-                        </div>
-                        <div class="form-item-question">
-                            <input type="number" step="0.5" min="0.5" max="100" name="numSets" placeholder="Enter # of sets" class="logInput" required></input>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="numRepsItem" class="logEntryItem">
-                <i class="fa-solid fa-repeat fa-5x orange"></i>
-                    <div class="my-auto mx-3">
-                        <div>
-                            <label for="numReps">Number of Reps</label>
-                        </div>
-                        <div class="form-item-question">
-                            <input type="number" step="0.5" min="0.5" max="1000" name="numReps" placeholder="Enter # of reps" class="logInput" required></input>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="dateLiftItem" class="logEntryItem">
-                    <i class="fa-regular fa-calendar fa-5x orange"></i>
-                    <div class="my-auto mx-3">
-                        <div>
-                            <label for="dateLift">Date of Workout</label>
-                        </div>
-                        <div class="form-item-question">
-                            <input type="date" name="dateLift" min="2022-01-01" max="<?php echo date('Y-m-d');?>" value="<?php echo date('Y-m-d');?>" class="logInput"></input>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="liftSubmit" class="logEntryItem text-center">
-                    <div class="col-10">
-                        <input type="submit" name="liftSubmitBtn" class="btn btn-warning" value="Submit Log"></input>
+                        <input type="submit" name="weightSubmitBtn" class="btn btn-warning" value="Submit Log"></input>
                     </div>
                 </div>
 
             </form>
         </div> <!-- End of grayBackdrop -->
 
-        <div class="orangeBackdrop mt-5 mb-5 px-5 py-3 mx-auto text-center">
+        <div class="blueBackdrop mt-5 mb-5 px-5 py-3 mx-auto text-center">
             <h2>My Workout History</h2>
             <hr>
             <ul class="list-group">
