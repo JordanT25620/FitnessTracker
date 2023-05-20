@@ -104,44 +104,23 @@
                     <div class="row">
                         <div class="col" style="margin: auto">
                             <?php 
-                                if(isset($_POST['cardioSubmitBtn'])){
-                                    $typeOfCardio = $_POST['typeOfCardio'];
-                                    $timeSpent = $_POST['timeCardio'];
-                                    $minOrHr = $_POST['cardioTime'];
-                                    $cardioDate = $_POST['dateCardio'];
-                                    $readableDate = date("F jS, Y", strtotime($cardioDate));
-                                    $timeSpentMins = $timeSpent;
+                                if(isset($_POST['weightSubmitBtn'])){
+                                    $weighInLbs = $_POST['weight'];
+                                    $weighInDate = $_POST['dateWeight'];
+                                    $bodyFat = (!empty($_POST['bodyFat']) ? $_POST['bodyFat'] : "NULL");
+                                    $bmi = (!empty($_POST['bmi']) ? $_POST['bmi'] : "NULL");
+                                    $water = (!empty($_POST['water']) ? $_POST['water'] : "NULL");
+                                    $bone = (!empty($_POST['bone']) ? $_POST['bone'] : "NULL");
+                                    $readableDate = date("F jS, Y", strtotime($weighInDate));
 
-                                    if($minOrHr == "hr"){
-                                        $timeSpentMins = $timeSpent * 60;
-                                    }
-
-                                    $insertCardioQuery = "INSERT INTO cardio_log VALUES($user_id, '$typeOfCardio', $timeSpentMins, '$cardioDate', NOW());" or die("Cardio Log: Error inserting cardio session into database!");
+                                    $insertWeighInQuery = "INSERT INTO weight_log (userid, weighInLbs, fat, bmi, water, bone, weighInDate, createdOn) VALUES($user_id, $weighInLbs, $bodyFat, $bmi, $water, $bone, '$weighInDate', NOW());" or die("Weight Log: Error inserting weight into database!");
                                     try{
-                                        $result = mysqli_query($conn, $insertCardioQuery);
+                                        $result = mysqli_query($conn, $insertWeighInQuery);
                                         if($result){
-                                            echo "<h4 style='color: green;'>Successfully logged your $timeSpent $minOrHr $typeOfCardio session on $readableDate!</h4>";
+                                            echo "<h4 style='color: green;'>Successfully logged your weight for $readableDate!</h4>";
                                         }
                                     } catch (Throwable $t) {
-                                        echo "<h4 style='color: red;'>Error occurred while logging your cardio session!</h4>";
-                                    }
-                                } elseif (isset($_POST['liftSubmitBtn'])){
-                                    $typeOfLift = $_POST['exercise'];
-                                    $weightAmount = $_POST['weight-lifted'];
-                                    $numSets = $_POST['numSets'];
-                                    $numReps = $_POST['numReps'];
-                                    $liftDate = $_POST['dateLift'];
-
-                                    $readableDate = date("F jS, Y", strtotime($liftDate));
-
-                                    $insertLiftQuery = "INSERT INTO lift_log VALUES($user_id, '$typeOfLift', $weightAmount, $numSets, $numReps, '$liftDate', NOW());" or die("Lift Log: Error inserting weightlifting session into database!");
-                                    try{
-                                        $result = mysqli_query($conn, $insertLiftQuery);
-                                        if($result){
-                                            echo "<h4 style='color: green;'>Successfully logged your $typeOfLift $numSets x $numReps on $readableDate!</h4>";
-                                        }
-                                    } catch (Throwable $t) {
-                                        echo "<h4 style='color: red;'>Error occurred while logging your weightlifting session!</h4>";
+                                        echo "<h4 style='color: red;'>Error occurred while logging your weight!</h4>";
                                     }
                                 } else {
                                     echo "<h2>Log Today's Weigh-In</h2>";
@@ -157,7 +136,7 @@
                 </div>
             <!-- -->
 
-            <form id="logWeightForm" class="myForm" method="post" action="workout.php">
+            <form id="logWeightForm" class="myForm" method="post" action="weight.php">
 
                 <div id="dateWeightItem" class="logEntryItem">
                     <i class="fa-regular fa-calendar fa-5x" style="color: #3299e9;"></i>
@@ -183,6 +162,79 @@
                     </div>
                 </div>
 
+                <div class="d-flex">
+                    
+                    <div class="col">
+                        <hr>
+                    </div>
+
+                    <div class="col" id="weighInAdvancedBtn">
+                        <div class="row justify-content-center">
+                            Advanced Options
+                        </div>
+                        <div class="row justify-content-center">
+                            <i id="weighInAdvancedDown" class="fa-solid fa-caret-down fa-2x weighInAdvancedIcon" style="color: #3299e9;"></i>
+                            <i id="weighInAdvancedUp" class="fa-solid fa-caret-up fa-2x weighInAdvancedIcon" style="color: #3299e9;"></i>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="advancedWeighInItems">
+
+                    <div id="bodyFatItem" class="logEntryItem">
+                    <i class="fa-solid fa-person fa-5x" style="color: #3299e9;"></i>
+                        <div class="my-auto ml-5">
+                            <div>
+                                <label for="bodyFat">Body Fat %</label>
+                            </div>
+                            <div class="form-item-question">
+                                <input type="number" step="0.1" min="1" max="100" name="bodyFat" placeholder="Enter Body Fat %" class="logInput"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="BMIItem" class="logEntryItem">
+                    <i class="fa-solid fa-scale-balanced fa-5x ml-2" style="color: #3299e9;"></i>
+                        <div class="my-auto mx-3">
+                            <div>
+                                <label for="bmi">BMI</label>
+                            </div>
+                            <div class="form-item-question">
+                                <input type="number" step="0.1" min="1" max="50" name="bmi" placeholder="Enter BMI" class="logInput"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="waterItem" class="logEntryItem">
+                    <i class="fa-solid fa-droplet fa-5x" style="color: #3299e9;"></i>
+                        <div class="my-auto ml-5">
+                            <div>
+                                <label for="water">Water Weight %</label>
+                            </div>
+                            <div class="form-item-question">
+                                <input type="number" step="0.1" min="1" max="100" name="water" placeholder="Enter Water %" class="logInput"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="boneItem" class="logEntryItem">
+                    <i class="fa-solid fa-bone fa-5x" style="color: #3299e9;"></i>
+                        <div class="my-auto ml-4">
+                            <div>
+                                <label for="bone">Bone Weight %</label>
+                            </div>
+                            <div class="form-item-question">
+                                <input type="number" step="0.1" min="1" max="50" name="bone" placeholder="Enter Bone %" class="logInput"></input>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div id="weightSubmit" class="logEntryItem text-center">
                     <div class="col-10">
                         <input type="submit" name="weightSubmitBtn" class="btn btn-warning" value="Submit Log"></input>
@@ -193,99 +245,63 @@
         </div> <!-- End of grayBackdrop -->
 
         <div class="blueBackdrop mt-5 mb-5 px-5 py-3 mx-auto text-center">
-            <h2>My Workout History</h2>
+            <h2>My Weigh-In History</h2>
             <hr>
             <ul class="list-group">
                 <?php 
-                    $checkIfUserHasAnyCardioLogs = "SELECT * FROM cardio_log WHERE userid='$user_id' ORDER BY createdOn" or die("Cardio History: Error checking database for existing cardio logs!");
-                    $resultCardio = mysqli_query($conn, $checkIfUserHasAnyCardioLogs);
+                    $checkIfUserHasAnyWeighInLogs = "SELECT * FROM weight_log WHERE userid='$user_id' ORDER BY createdOn DESC" or die("WeighIn History: Error checking database for existing weigh-in logs!");
+                    $resultWeighIn = mysqli_query($conn, $checkIfUserHasAnyWeighInLogs);
                     
-                    $checkIfUserHasAnyLiftLogs = "SELECT * FROM lift_log WHERE userid='$user_id' ORDER BY createdOn" or die("Lift History: Error checking database for existing lift logs!");
-                    $resultLift = mysqli_query($conn, $checkIfUserHasAnyLiftLogs);
-                    
-                    if(mysqli_num_rows($resultCardio) <= 0 && mysqli_num_rows($resultLift) <= 0){
+                    if(mysqli_num_rows($resultWeighIn) <= 0){
                         echo   "<li class='list-group-item list-group-item-action list-group-item-warning m-1'>
                                     <div class='container'>
                                         <div class='row'>
                                             <div class='col'>
-                                                You haven't logged any workouts!
+                                                Start tracking your weight above!
                                             </div>
                                         </div>
                                     </div>
                                 </li>";
                     } else {
                         $logs = array();
-                        while ($row = mysqli_fetch_assoc($resultCardio)){ //Get row from database table
-                            $logs[$row['createdOn']] = $row;
+                        while ($row = mysqli_fetch_assoc($resultWeighIn)){ //Get row from database table
+                            $logs[] = $row;
                         }
-                        while ($row = mysqli_fetch_assoc($resultLift)){ //Get row from database table
-                            $logs[$row['createdOn']] = $row;
-                        }
-                        krsort($logs);
-                        $yellow = true;
-                        foreach($logs as $log){
-                            if($yellow){
-                                echo   "<li class='list-group-item list-group-item-action list-group-item-warning m-1' style='border-radius: 5px;'>";
-                                $yellow = false;
+                        $aqua = true;
+                        foreach ($logs as $log){
+                            if($aqua){
+                                echo   "<li class='list-group-item list-group-item-action list-group-item-primary m-1' style='border-radius: 5px;'>";
+                                $aqua = false;
                             } else {
                                 echo   "<li class='list-group-item list-group-item-action list-group-item-light m-1' style='border-radius: 5px;'>";
-                                $yellow = true;
+                                $aqua = true;
                             }
-                            if (array_key_exists("cardioDate", $log)){
-                                echo   "<div class='container'>
-                                            <div class='row'>
-                                                <div class='col-7 text-left'>
-                                                    <span class='workoutHistoryTopLeft'>" .
-                                                    $log['typeOfCardio'] . " Session"
+                            echo   "<div class='container'>
+                                        <div class='row'>
+                                            <div class='col-7 text-left'>
+                                                <span class='workoutHistoryTopLeft'>" .
+                                                $log['typeOfCardio'] . " Session"
+                                            . "</span>
+                                            </div>
+                                            <div class='col-5 text-right'>" .
+                                                date("F jS, Y", strtotime($log['cardioDate']))
+                                            . "</div>
+                                        </div>
+
+                                        <div class='row'>
+                                            <div class='col-5'>
+                                                <span class='workoutHistoryBottomLeft'>" .
+                                                    ($log['timeSpentMins'] > 60 ? number_format((float) $log['timeSpentMins'] / 60, 2, '.', '') . ' hrs' : number_format((float) $log['timeSpentMins'], 2, '.', '') . ' mins')
                                                 . "</span>
-                                                </div>
-                                                <div class='col-5 text-right'>" .
-                                                    date("F jS, Y", strtotime($log['cardioDate']))
-                                                . "</div>
                                             </div>
-
-                                            <div class='row'>
-                                                <div class='col-5'>
-                                                    <span class='workoutHistoryBottomLeft'>" .
-                                                        ($log['timeSpentMins'] > 60 ? number_format((float) $log['timeSpentMins'] / 60, 2, '.', '') . ' hrs' : number_format((float) $log['timeSpentMins'], 2, '.', '') . ' mins')
-                                                    . "</span>
-                                                </div>
-                                                <div class='col-7 text-right mt-auto'>
-                                                    <span class='workoutHistoryBottomRight'>Logged " .
-                                                    date("F jS g:i a", strtotime($log['createdOn']))
-                                                    . "</span>
-                                                </div>
+                                            <div class='col-7 text-right mt-auto'>
+                                                <span class='workoutHistoryBottomRight'>Logged " .
+                                                date("F jS g:i a", strtotime($log['createdOn']))
+                                                . "</span>
                                             </div>
                                         </div>
-                                    </li>";
-                            } elseif (array_key_exists("liftDate", $log)){
-                                echo   "<div class='container'>
-                                            <div class='row'>
-                                                <div class='col-7 text-left'>
-                                                    <span class='workoutHistoryTopLeft'>" .
-                                                        $log['typeOfLift']
-                                                    . "</span>
-                                                </div>
-                                                <div class='col-5 text-right'>" .
-                                                    date("F jS, Y", strtotime($log['liftDate']))
-                                                . "</div>
-                                            </div>
-
-                                            <div class='row'>
-                                                <div class='col-4'>
-                                                    <span class='workoutHistoryBottomLeft'>" .
-                                                        $log['numSets'] . "x" . $log['numReps'] . " @ " . $log['weightAmount'] . " Lbs"
-                                                    . "</span>
-                                                </div>
-                                                <div class='col-8 text-right mt-auto'>
-                                                    <span class='workoutHistoryBottomRight'>Logged " .
-                                                        date("F jS g:i a", strtotime($log['createdOn']))
-                                                    . "</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>";
-                            }
+                                    </div>
+                                </li>";
                         }
                     }
                 ?>

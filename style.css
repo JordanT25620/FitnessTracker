@@ -270,3 +270,11 @@ select {
         font-size:12px; 
     }
 }
+
+.advancedWeighInItems {
+    display: none;
+}
+
+#weighInAdvancedUp {
+    display: none;
+}

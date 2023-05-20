@@ -29,10 +29,13 @@ CREATE TABLE IF NOT EXISTS lift_log (
     FOREIGN KEY (userid) REFERENCES users(id)
 );
 
-/* Hasn't yet been created in the DB */
 CREATE TABLE IF NOT EXISTS weight_log (
     userid int NOT NULL,
-    weightInLbs float NOT NULL,
+    weighInLbs float NOT NULL,
+    fat float,
+    bmi float,
+    water float,
+    bone float,
     weighInDate date NOT NULL,
     createdOn DATETIME NOT NULL DEFAULT NOW(),
     FOREIGN KEY (userid) REFERENCES users(id)

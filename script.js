@@ -22,5 +22,17 @@ $(document).ready(function(){
         $("#logWeightBtnDiv").hide();
         $("#logWeightForm").css("display", "block");
     });
+
+    $("#weighInAdvancedBtn").hover(function(){
+        $(".weighInAdvancedIcon").css("color", "gray");
+        }, function(){
+        $(".weighInAdvancedIcon").css("color", "#3299e9");
+    });
+
+    $("#weighInAdvancedBtn").click(function(){
+        $(".advancedWeighInItems").toggle();
+        $("#weighInAdvancedDown").toggle();
+        $("#weighInAdvancedUp").toggle();
+    });
     
 });
