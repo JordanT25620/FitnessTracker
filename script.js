@@ -34,5 +34,22 @@ $(document).ready(function(){
         $("#weighInAdvancedDown").toggle();
         $("#weighInAdvancedUp").toggle();
     });
+
+    var data = [{
+        values: [19, 26, 50, 5],
+        labels: ['Body Fat', 'Water', 'Skeletal Mass', 'Other'],
+        textinfo: "label+percent",
+        type: 'pie'
+    }];
+      
+    var layout = {
+        height: 400,
+        width: 500,
+        showlegend: false,
+        hovermode: false
+    };
+      
+    Plotly.newPlot("myDiv", data, layout, {modeBarButtonsToRemove: ['toImage'], displaylogo: false});
     
 });
+  

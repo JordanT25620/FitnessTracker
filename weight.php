@@ -37,6 +37,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- FontAwesome Kit -->
   <script src="https://kit.fontawesome.com/8e14032615.js" crossorigin="anonymous"></script>
+  <!-- Plotly JS -->
+  <script src="https://cdn.plot.ly/plotly-2.20.0.min.js" charset="utf-8"></script>
   <!-- Custom External Stylesheet -->
   <link href="style.css" rel="stylesheet" type="text/css" />
   <!-- Custom Javascript file -->
@@ -97,6 +99,9 @@
     </div>
 
     <div class="websitePage text-left">
+        <div id="myDiv" style="width: 500px; height: 500px; background-color: beige;">
+        </div>
+
         <div class="grayBackdrop mt-5 mb-5 p-3 p-lg-5 mx-auto">
 
             <!-- Before displaying form -->
@@ -307,7 +312,7 @@
                 ?>
 
             </ul>
-        </div> <!-- end of orangeBackdrop -->
+        </div> <!-- end of blueBackdrop -->
         
     </div>
 
