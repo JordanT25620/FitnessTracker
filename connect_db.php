@@ -1,3 +1,3 @@
 <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'gymbro') or die('Connection to DB failed.');
+    $conn = mysqli_connect('localhost', 'root', '', 'fitnesstracker') or die('Connection to DB failed.');
 ?>

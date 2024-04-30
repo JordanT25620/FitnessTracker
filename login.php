@@ -25,7 +25,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>GymBro - Login</title>
+  <title>FitnessTracker - Login</title>
 
   <!-- Custom font links -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

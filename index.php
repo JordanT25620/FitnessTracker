@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>GymBro - Welcome</title>
+  <title>FitnessTracker - Welcome</title>
 
   <!-- Custom font links -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
             <i class="fas fa-dumbbell fa-2x orange"></i>
         </div>
         <div class="row justify-content-center">
-            <span>GymBro</span>
+            <span>FitnessTracker</span>
         </div>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

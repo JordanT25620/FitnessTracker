@@ -56,7 +56,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>GymBro - Register</title>
+  <title>FitnessTracker - Register</title>
 
   <!-- Custom font links -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

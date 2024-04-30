@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS gymbro;
-USE gymbro;
+CREATE DATABASE IF NOT EXISTS fitnesstracker;
+USE fitnesstracker;
 CREATE TABLE IF NOT EXISTS users (
     id int PRIMARY KEY AUTO_INCREMENT,
     username varchar(25) NOT NULL,

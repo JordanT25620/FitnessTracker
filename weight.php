@@ -19,7 +19,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>GymBro - Home</title>
+  <title>FitnessTracker - Home</title>
 
   <!-- Custom font links -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,7 @@
             <i class="fas fa-dumbbell fa-2x orange"></i>
         </div>
         <div class="row justify-content-center">
-            <span>GymBro</span>
+            <span>FitnessTracker</span>
         </div>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,9 +71,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="workout.php">Workout Logger</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="protein.php">Protein Shake Logger</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="progress.php">My Progress</a>
